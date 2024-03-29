@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 class ClientController extends Controller
 {
     public readonly Client $client;
+    //descomente para validar os campos
     public $rules = [
         'name' => 'required|string|max:255',
         'email' => 'required|unique:clients|email|max:255',
@@ -157,7 +158,12 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        $client->delete();
+        try {
+            $client->delete();
+        } catch (\Throwable $th) {
+            Log::error('Erro ao tentar deletar cliente:'. $th);
+        }
+
         return redirect()->route('clients.index');    
     }
 }
