@@ -57,11 +57,11 @@ $(document).ready(function(){
         form.attr('action', newAction);
     
         // Abre o modal
-        $('#editEmployeeModal').modal('show');
+        $('#editClientModal').modal('show');
     });
 
     $('.close').click(function(){
-        $('#editEmployeeModal').find('input[type=text], input[type=email], input[type=date], input[type=number]').val('');
+        $('#editClientModal').find('input[type=text], input[type=email], input[type=date], input[type=number]').val('');
     });
 
 	$('[data-toggle="tooltip"]').tooltip();

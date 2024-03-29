@@ -22,7 +22,7 @@
                             <h2>CRUD <b>Clients</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Novo Cliente</span></a>
+                            <a href="#addClientModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Novo Cliente</span></a>
                         </div>
                     </div>
                 </div>
@@ -64,8 +64,8 @@
                                 <td>idade</td>
                                 <td>{{ \Carbon\Carbon::parse($client->date_born)->format('d/m/Y') }}</td>
                                 <td>
-                                    <a href="#editEmployeeModal" class="edit" data-client="{{ $client }}"  data-id="{{$client->id }}" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteEmployeeModal" data-id="{{$client->id }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    <a href="#editClientModal" class="edit" data-client="{{ $client }}"  data-id="{{$client->id }}" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                    <a href="#deleteClientModal" data-id="{{$client->id }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -77,8 +77,12 @@
                         </div>
                         <ul class="pagination">
                             <li class="page-item"><a href="{{ '/clients?page=' . ($clients->currentPage() - 1) }}">Voltar</a></li>
-                            @for ($i = $clients->currentPage(); $i < $clients->lastPage(); $i++)
-                                <li class="page-item"><a href="#" class="page-link">{{ $i }}</a></li>
+                            @for ($i = 0; $i < $clients->lastPage(); $i++)
+                            @if ($i == $clients->currentPage())
+                                <li class="page-item active"><a href="{{ '/clients?page=' . $i }}" class="page-link">{{ $i }}</a></li>
+                            @else
+                                <li class="page-item"><a href="{{ '/clients?page=' . $i }}" class="page-link">{{ $i }}</a></li>
+                            @endif
                             @endfor
                             <li class="page-item"><a href="{{ '/clients?page=' . ($clients->currentPage() + 1) }}">Avançar</a></li>
                         </ul>
@@ -99,13 +103,13 @@
 
 
         <!-- add Modal HTML -->
-        <div id="addEmployeeModal" class="modal fade">
+        <div id="addClientModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form action="{{ route('clients.store') }}" method="POST">
                         @csrf
                         <div class="modal-header">						
-                            <h4 class="modal-title">Add Employee</h4>
+                            <h4 class="modal-title">Add Client</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">					
@@ -166,15 +170,13 @@
                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                             <input type="submit" class="btn btn-success" value="Add">
                         </div>
-
-
                     </form>
                 </div>
             </div>
         </div>
 
         <!-- Edit Modal HTML -->
-        <div id="editEmployeeModal" class="modal fade">
+        <div id="editClientModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form id="editForm" data-edit-action="{{ route('clients.update', ['client' => '__ID__']) }}" method="POST">
@@ -240,7 +242,7 @@
                         </div>
                         <div class="modal-footer">
                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-success" value="Add">
+                            <input type="submit" class="btn btn-success" value="Editar">
                         </div>
 
                     </form>
@@ -248,7 +250,7 @@
             </div>
         </div>
         <!-- Delete Modal HTML -->
-        <div id="deleteEmployeeModal" class="modal fade">
+        <div id="deleteClientModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     {{-- <form action="{{ route('clients.destroy', ['client' => $client->id]) }}" method="POST"> --}}
@@ -257,17 +259,17 @@
                         @csrf
                         @method('DELETE')
                         <div class="modal-header">						
-                            <h4 class="modal-title">Delete Employee</h4>
+                            <h4 class="modal-title">Deletar Cliente</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">					
-                            <p>Are you sure you want to delete these Records?</p>
-                            <p class="text-warning"><small>This action cannot be undone.</small></p>
+                            <p>Tem certeza que deseja excluir?</p>
+                            <p class="text-warning"><small>Essa açao não poderá ser desfeita.</small></p>
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" name="client_id" id="client_id" value="">
-                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-danger" value="Delete">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                            <input type="submit" class="btn btn-danger" value="Deletar">
                         </div>
                     </form>
                 </div>
