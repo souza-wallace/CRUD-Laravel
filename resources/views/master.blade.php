@@ -27,6 +27,17 @@
                     </div>
                 </div>
                 @if (count($clients) != 0)
+                <div class="row" style="margin-left:60px; margin-top: 50px; margin-bottom: 20px;">
+                    <div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" name="search" id="inputSearch" class="form-control" placeholder="Busque pelo nome, Email ou CPF">
+                    </div>
+                    <div>
+                        <button class="btn btn-success" id="search">Buscar</button>
+                        <button class="btn btn-warning" id="clear">Limpar</button>
+                    </div>
+                </div>
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>

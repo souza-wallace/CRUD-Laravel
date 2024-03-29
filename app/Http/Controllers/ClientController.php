@@ -32,9 +32,10 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clients = $this->client->with('address')->where('status', 'active')->select('id', 'name', 'cpf', 'email', 'date_born')->orderBy('created_at', 'desc')->paginate(10);
+
+        $clients = $this->client->with('address')->select('id', 'name', 'cpf', 'email', 'date_born')->orderBy('created_at', 'desc')->paginate(10);
         
         if (View::exists('client.clients')) {
             return view('client.clients', ['clients' => $clients]);
@@ -165,5 +166,23 @@ class ClientController extends Controller
         }
 
         return redirect()->route('clients.index');    
+    }
+
+    public function filter(Request $request)
+    {
+        $filteredClients = $this->client
+            ->with('address')
+            ->where('name', 'like', '%' . $request->input('text') . '%')
+            ->orWhere('email', 'like', '%' . $request->input('text') . '%')
+            ->orWhere('cpf', 'like', '%' . $request->input('text') . '%')
+            ->select('id', 'name', 'cpf', 'email', 'date_born')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        if(count($filteredClients) != 0){
+            return view('client.clients', ['clients' => $filteredClients]);
+        } else {
+            return redirect()->route('clients.index');    
+        }
     }
 }

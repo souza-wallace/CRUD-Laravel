@@ -83,4 +83,34 @@ $(document).ready(function(){
 			$("#selectAll").prop("checked", false);
 		}
 	});
+
+    $('#search').click(function(){
+        const input = $('#inputSearch').val();
+        console.log(input, 'inp')
+
+        $.ajax({
+            url: '/filter',
+            type: 'GET',
+            data: { text: input },
+            success: function(response) {
+                $('body').html(response);
+            },
+            error: function(xhr, status, error) {
+              console.error('Erro ao obter clientes: ' + error);
+            }
+        });
+    });
+
+    $('#clear').click(function(){
+        $.ajax({
+            url: '/clients',
+            type: 'GET',
+            success: function(response) {
+                $('body').html(response);
+            },
+            error: function(xhr, status, error) {
+              console.error('Erro ao obter clientes: ' + error);
+            }
+        });
+    });
 });
