@@ -3,11 +3,10 @@
 Clone Repositório
 ```sh
 git clone 
-git@github.com:souza-wallace/truckpag.git
-https://github.com/souza-wallace/truckpag.git
+git@github.com:souza-wallace/CRUD-Laravel.git
 ```
 ```sh
-cd truckpag
+cd CRUD-Laravel
 ```
 
 Crie o Arquivo .env
