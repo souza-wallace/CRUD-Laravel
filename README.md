@@ -14,6 +14,15 @@ Crie o Arquivo .env
 cp .env.example .env
 ```
 
+Após criar o .env, configure os campos abaixos com as informações do seu banco de dados
+```sh
+DB_CONNECTION=
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+```
 Instale as dependências do projeto
 ```sh
 composer install
