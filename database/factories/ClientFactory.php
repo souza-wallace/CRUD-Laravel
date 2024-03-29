@@ -21,6 +21,7 @@ class ClientFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'cpf' => $this->generateCPF(),
             'date_born' => fake()->date(),
+            'status' => fake()->randomElement(['active', 'inactive']),
         ];
     }
 
