@@ -41,7 +41,6 @@ Acesse o projeto
 [http://localhost:8000](http://localhost:8000)
 
 
-O projeto é um CRUD simples de clientes.
-obs: para visualizar dados do cliente clique no nome ou no cpf.
+O projeto é um CRUD simples de clientes. obs: para visualizar dados do cliente clique no nome ou no cpf.
 
 ![Alt text](image.png)
